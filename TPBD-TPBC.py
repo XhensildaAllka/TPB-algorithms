@@ -17,16 +17,9 @@ from numpy import unravel_index
 
 
 file_Captor = "SVR-N212.csv"
-#file_RefSt = "virtual_sensor_pr.csv"
-#file_Captor = 'CAP-17001_Cal1.txt'
-
-
-#dir_path = "C:/Users/Usuario/Dropbox/PC/Desktop/UPC/Results-Paper-SVD/Ozone(2017)/FirstPhase/"
 dir_path = "C:/Users/Usuario/Dropbox/PC/Desktop/UPC/Results-Paper-SVD\Ozone(2018)\FirstPhase\Calibration/"
 
 sensor_file = dir_path + file_Captor
-#sensor_file2 = dir_path + "PR-2019-RefTemp.csv"
-
 
 
 #%%
@@ -185,13 +178,3 @@ phi = U_all[:, :k_TPBC].transpose() @training_ref_all_0 @ training_capt_all_0.tr
         @ np.linalg.pinv(U_all[:, :k_TPBC].transpose() @training_capt_all_0 @training_capt_all_0.transpose() @U_all[:, :k_TPBC] + min_lambda*np.identity(k_TPBC)) 
 TPBC_capt_test_approx = avg_all + U_all[:,:k_TPBC] @ phi @U_all[:, :k_TPBC].transpose() @testing_capt_all_0
 TPBD_capt_test_approx = avg_all + U_all[:,:k_TPBD] @U_all[:, :k_TPBD].transpose() @testing_capt_all_0
-
-
-
-
-
-
-
-
-
-
