@@ -14,17 +14,16 @@ import random
 from sklearn.model_selection import KFold
 from itertools import chain
 from numpy import unravel_index
+import os
 
-
-file_Captor = "SVR-N212.csv"
-dir_path = "C:/Users/Usuario/Dropbox/PC/Desktop/UPC/Results-Paper-SVD\Ozone(2018)\FirstPhase\Calibration/"
-
-sensor_file = dir_path + file_Captor
+dir_path = 'C:/Users/Usuario/Dropbox/PC/Desktop/UPC/Results-TPB/Ozone(2018)/FirstPhase/'
+os.chdir(dir_path)
+path = os.getcwd()
 
 
 #%%
 # estimated low-cost sensor data (reshape in 2-dimensional data, rows = 24 hours and columns = number of days)
-sensor_data = pd.read_csv(sensor_file, sep=',')
+sensor_data = pd.read_csv(path + "/Calibration/SVR-N212.csv", sep=',')
 sensor_data.date = pd.to_datetime(sensor_data.date, format='%Y-%m-%d %H:%M:%S')
 sensor_data.set_index('date', inplace = True)
 data_sensor = pd.pivot_table(sensor_data, index=sensor_data.index.date, columns=sensor_data.index.hour, values='calibrated SVR O3').transpose()
@@ -36,10 +35,11 @@ data_sensor = pd.pivot_table(sensor_data, index=sensor_data.index.date, columns=
 # data_sensor = data_sensor.sort_index()
 
 # reference station data
-data_ref = pd.read_csv(r"C:/Users/Usuario/Dropbox/PC/Desktop/UPC/Results-Paper-SVD\Ozone(2018)\FirstPhase\Database/N212_supervised.csv", sep=';')
+data_ref = pd.read_csv(path + "/Database/N212_supervised.csv", sep=';')
 data_ref.date = pd.to_datetime(data_ref.date, format='%Y-%m-%d %H:%M:%S')
 data_ref.set_index('date', inplace = True)
 ref_data = pd.pivot_table(data_ref, index = data_ref.index.date, columns = data_ref.index.hour, values='ref_o3').transpose()
+
 
 #%%
 # Remove the columns (days) which have nan data
