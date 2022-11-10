@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed May  4 16:53:40 2022
-
 @author: Xhensilda Allka
 """
 
